@@ -26,6 +26,6 @@ namespace PawPanion.Models
         public string ImageLocation { get; set; }
 
         [Required]
-        public Boolean IsVet { get; set; }
+        public bool IsVet { get; set; }
     }
 }

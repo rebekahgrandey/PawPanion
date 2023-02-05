@@ -8,12 +8,12 @@ USE [PawPanion]
 GO
 
 
-DROP TABLE IF EXISTS [User];
-DROP TABLE IF EXISTS [Pet];
+DROP TABLE IF EXISTS [Appointment];
 DROP TABLE IF EXISTS [ToDo];
 DROP TABLE IF EXISTS [Record];
 DROP TABLE IF EXISTS [RecordType];
-DROP TABLE IF EXISTS [Appointment];
+DROP TABLE IF EXISTS [Pet];
+DROP TABLE IF EXISTS [User];
 GO
 
 
@@ -33,7 +33,7 @@ CREATE TABLE [Pet] (
   [Name] nvarchar(255) NOT NULL,
   [Breed] nvarchar(255) NOT NULL,
   [IsMale] bit NOT NULL,
-  [Age] float NOT NULL,
+  [Birthdate] date NOT NULL,
   [OwnerId] int NOT NULL,
   [IsDog] bit NOT NULL,
   [ImageLocation] nvarchar(255)
