@@ -21,7 +21,7 @@ namespace PawPanion.Models
         [MaxLength(320)]
         public string Email { get; set; }
 
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         public string ImageLocation { get; set; }
 
