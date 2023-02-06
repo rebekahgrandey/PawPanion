@@ -7,7 +7,7 @@ using PawPanion.Repositories;
 
 namespace PawPanion.Controllers
 {
-    [Authorize]
+    /*[Authorize]*/
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
