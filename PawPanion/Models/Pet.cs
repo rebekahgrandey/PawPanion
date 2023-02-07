@@ -19,7 +19,7 @@ namespace PawPanion.Models
         public Boolean IsMale { get; set; }
 
         [Required]
-        public float Age { get; set; }
+        public DateTime Birthdate { get; set; }
 
         public int OwnerId { get; set; }
 

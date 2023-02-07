@@ -2,14 +2,6 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import Hello from "./Hello";
-import TagList from "./TagList";
-import PostList from "./Posts/PostList";
-import PostDetails from "./Posts/PostDetails";
-import { UserList } from "./UserList";
-import TagForm from "./TagForm";
-import TagEditForm from "./TagEditForm";
-import TagDetails from "./TagDetails";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -19,7 +11,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                     <Route
                         index
-                        element={isLoggedIn ? <Hello /> : <Navigate to="/login" />}
+                        element={isLoggedIn ? <VetHomePage /> : <Navigate to="/login" />}
                     />
                     <Route
                         path="UserList"
