@@ -82,10 +82,10 @@ export default function Register() {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="userType">What type of user are you?</Label>
+                    <Label for="userType">Are you a vet?</Label>
                     <Input
                         id="userType"
-                        type="radio"
+                        type="checkbox"
                         onChange={(e) => setUserType(e.target.value)}
                     />
                 </FormGroup>

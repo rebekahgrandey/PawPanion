@@ -3,6 +3,7 @@ import "firebase/auth";
 import { Navigate } from "react-router-dom";
 
 const _apiUrl = "/api/user";
+export const getToken = () => firebase.auth().currentUser.getIdToken();
 
 const _doesUserExist = (firebaseUserId) => {
     return getToken().then((token) =>
@@ -25,10 +26,6 @@ const _saveUser = (user) => {
             body: JSON.stringify(user)
         }).then(resp => resp.json()));
 };
-
-
-
-export const getToken = () => firebase.auth().currentUser.getIdToken();
 
 
 export const login = (email, pw) => {
