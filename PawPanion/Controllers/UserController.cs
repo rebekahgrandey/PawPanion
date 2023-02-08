@@ -7,7 +7,7 @@ using PawPanion.Repositories;
 
 namespace PawPanion.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -25,11 +25,30 @@ namespace PawPanion.Controllers
             return Ok(_userRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
+        [HttpGet("DoesUserExist/{firebaseUserId}")]
+        public IActionResult DoesUserExist(string firebaseUserId)
+        {
+            var userProfile = _userRepository.GetByFirebaseUserId(firebaseUserId);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
             var users = _userRepository.GetAllUsers();
             return Ok(users);
+        }
+
+        [HttpPost]
+        public IActionResult Register(User user)
+        {
+            _userRepository.Add(user);
+            return CreatedAtAction(nameof(GetUser),
+                new { firebaseUserId = user.FirebaseUserId }, user);
         }
     }
 }

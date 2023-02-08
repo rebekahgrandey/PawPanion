@@ -18,8 +18,8 @@ namespace PawPanion.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, FirebaseUserId, Name, Email, Phone, ImageLocation, IsVet
-                          FROM User
+                        SELECT Id, FirebaseUserId, [Name], Email, Phone, ImageLocation, IsVet
+                          FROM [User]
                          WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
@@ -57,7 +57,7 @@ namespace PawPanion.Repositories
                     cmd.CommandText = @"
                     SELECT Id, FirebaseUserId, Name, Email, Phone, ImageLocation, IsVet
                     FROM [User]
-                    ORDER BY Name;";
+                    ORDER BY [Name];";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -83,6 +83,28 @@ namespace PawPanion.Repositories
                     }
                 }
 
+            }
+        }
+
+        public void Add(User user)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO User (FirebaseUserId, Name, Email, Phone, ImageLocation, IsVet)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@FirebaseUserId, @Name, @Email)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", user.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@Name", user.Name);
+                    DbUtils.AddParameter(cmd, "@Email", user.Email);
+                    DbUtils.AddParameter(cmd, "Phone", user.Phone);
+                    DbUtils.AddParameter(cmd, "ImageLocation", user.ImageLocation);
+                    DbUtils.AddParameter(cmd, "IsVet", user.IsVet);
+
+                    user.Id = (int)cmd.ExecuteScalar();
+                }
             }
         }
 

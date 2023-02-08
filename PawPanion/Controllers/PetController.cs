@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace PawPanion.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PetController : ControllerBase
@@ -22,6 +22,7 @@ namespace PawPanion.Controllers
             _userRepository=userRepository;
         }
 
+        
         [HttpGet("{id}")]
         public IActionResult GetPetById(int id)
         {
@@ -31,9 +32,9 @@ namespace PawPanion.Controllers
                 NotFound();
             }
             return Ok(post);
-        }
+        } 
 
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public IActionResult GetPetByOwnerId(int id)
         {
             var post = _petRepository.GetPetByOwnerId(id);
@@ -41,8 +42,8 @@ namespace PawPanion.Controllers
             {
                 NotFound();
             }
-            return Ok(post);
-        }
+            return Ok(post); 
+        } */
 
         [HttpGet]
         public ActionResult GetAll()

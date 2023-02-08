@@ -8,5 +8,6 @@ namespace PawPanion.Repositories
     {
         List <User> GetAllUsers();
         User GetByFirebaseUserId(string firebaseUserId);
+        void Add(User user);
     }
 }
