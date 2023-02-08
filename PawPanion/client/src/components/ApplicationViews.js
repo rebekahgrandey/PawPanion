@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
+import { HomePage } from "./userViews/HomePage";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -11,11 +12,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                     <Route
                         index
-                        element={isLoggedIn ? <VetHomePage /> : <Navigate to="/login" />}
-                    />
-                    <Route
-                        path="UserList"
-                        element={isLoggedIn ? <UserList /> : <Navigate to="/UserList" />}
+                        element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
                     />
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />

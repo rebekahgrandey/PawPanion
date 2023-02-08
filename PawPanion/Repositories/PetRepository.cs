@@ -23,25 +23,37 @@ namespace PawPanion.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT p.Id, p.Name, Breed, IsMale, Birthdate, p.OwnerId, IsDog,
-                       p.ImageLocation, u.Name, u.Id
-                       FROM Pet p JOIN [User] u ON p.OwnerId = u.Id
+                       SELECT p.Id AS PetId, p.Name AS PetName, Breed, IsMale, Birthdate, p.OwnerId, IsDog, p.ImageLocation, u.Name AS UserName, u.Id AS UserId, FirebaseUserId, Email, Phone, u.ImageLocation
+                       FROM Pet p
+                       JOIN [User] u ON p.OwnerId = u.Id
                        ORDER BY u.Name
 				       ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         List<Pet> pets = new List<Pet>();
+                        
                         while (reader.Read())
                         {
                             Pet pet = new Pet
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name"),
+                                Id = DbUtils.GetInt(reader, "PetId"),
+                                Name = DbUtils.GetString(reader, "PetName"),
                                 Breed = DbUtils.GetString(reader, "Breed"),
                                 IsMale = reader.GetBoolean(reader.GetOrdinal("IsMale")),
                                 Birthdate = DbUtils.GetDateTime(reader, "Birthdate"),
-                                OwnerId = DbUtils.GetInt(reader, "OwnerId")
+                                OwnerId = DbUtils.GetInt(reader, "OwnerId"),
+                                Owner = new User()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserId"),
+                                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                    Name = DbUtils.GetString(reader, "UserName"),
+                                    Email = DbUtils.GetString(reader, "Email"),
+                                    Phone = DbUtils.GetString(reader, "Phone"),
+                                    ImageLocation = DbUtils.GetString(reader, "ImageLocation")
+                                },
+                                IsDog = reader.GetBoolean(reader.GetOrdinal("IsDog")),
+                                ImageLocation = DbUtils.GetString(reader, "ImageLocation")
                             };
 
 
