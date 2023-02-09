@@ -49,10 +49,19 @@ export const addPet = (pet) => {
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(pet)
+        }).then((resp) => {
+            if (resp.ok) {
+                return resp.json();
+            } else if (resp.status === 401) {
+                throw new Error("Unauthorized");
+            } else {
+                throw new Error(
+                    "An unknown error occurred.",
+                );
+            }
         });
-    });
 
-
+    })
 };
 
 export const getPetById = (id) => {

@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import { HomePage } from "./userViews/HomePage";
+import { AddPetForm } from "./Pets/AddPet";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -14,6 +15,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                         index
                         element={isLoggedIn ? <HomePage /> : <Navigate to="/login" />}
                     />
+
+                    <Route path="add-pet" element={<AddPetForm />} />
+
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />

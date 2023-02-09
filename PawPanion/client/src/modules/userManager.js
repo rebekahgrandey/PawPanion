@@ -2,9 +2,9 @@ import { getToken } from "./authManager";
 
 const baseUrl = "/api/user";
 
-export const getCurrentUserByFirebaseId = (id) => {
+export const getCurrentUserByFirebaseId = (firebaseId) => {
     return getToken().then((token) => {
-        return fetch(`${baseUrl}/${id}`, {
+        return fetch(`${baseUrl}/${firebaseId}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -14,7 +14,7 @@ export const getCurrentUserByFirebaseId = (id) => {
                 return res.json();
             } else {
                 throw new Error(
-                    "An unknown error occured.",
+                    "An unknown error occured: could not get current user.",
                 );
             }
         });
