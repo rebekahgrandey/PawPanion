@@ -82,7 +82,7 @@ export default function Register() {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="userType">Are you a vet?</Label>
+                    <Label for="userType">Check box if you are a vet:</Label>
                     <Input
                         id="userType"
                         type="checkbox"

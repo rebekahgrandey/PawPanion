@@ -57,7 +57,7 @@ namespace PawPanion.Controllers
         public IActionResult Post(Pet pet)
         {
             _petRepository.Add(pet);
-            return CreatedAtAction("Get", new { id = pet.Id }, pet);
+            return Ok (pet);
         }
 
         [HttpPut("{id}")]

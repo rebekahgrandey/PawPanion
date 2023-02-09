@@ -2,7 +2,6 @@ import "firebase/auth";
 import { getUserPets } from "../../modules/petManager";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card } from "reactstrap";
 
 export const OwnerHomePage = () => {
     const [ownerPets, setOwnerPets] = useState([]);
