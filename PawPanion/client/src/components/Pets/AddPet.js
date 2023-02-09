@@ -27,7 +27,7 @@ export const AddPetForm = () => {
     }, []);
 
     const handleSaveButtonClick = (event) => {
-        event.preventDefault();
+        event.preventDefault(); //no page refresh
         const newPet = {
             name: userInput.name,
             breed: userInput.breed,
@@ -40,9 +40,7 @@ export const AddPetForm = () => {
         if (
             userInput.name &&
             userInput.breed &&
-            userInput.isMale &&
-            userInput.birthdate &&
-            userInput.isDog
+            userInput.birthdate
         ) {
             return addPet(newPet)
                 .then(() => navigate("/"));
@@ -53,9 +51,16 @@ export const AddPetForm = () => {
 
     const handleInputChange = (event) => {
         const copy = { ...userInput };
-        copy[event.target.name] = event.target.value;
+
+        if (event.target.type === "checkbox") {
+            copy[event.target.name] = event.target.checked
+        } else {
+            copy[event.target.name] = event.target.value;
+        }
+
         setUserInput(copy);
     };
+
 
     return (
         <form className="ticketForm">
@@ -94,9 +99,8 @@ export const AddPetForm = () => {
                 <div className="form-group">
                     <label htmlFor="isMale">Is your pet Male?: </label>
                     <input
-                        required
                         autoFocus
-                        name="servingSize"
+                        name="isMale"
                         type="checkbox"
                         className="form-control"
                         value={userInput.isMale}
@@ -122,7 +126,6 @@ export const AddPetForm = () => {
                 <div className="form-group">
                     <label htmlFor="isDog">{`Is your pet a dog? (otherwise we will call it a cat).`}</label>
                     <input
-                        required
                         autoFocus
                         name="isDog"
                         type="checkbox"
