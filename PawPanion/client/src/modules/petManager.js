@@ -21,6 +21,25 @@ export const getAllPets = () => {
     });
 };
 
+export const getUserPets = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/UserPets`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to get pictures.",
+                );
+            }
+        });
+    });
+};
+
 export const addPet = (pet) => {
     return getToken().then((token) => {
         return fetch(baseUrl, {

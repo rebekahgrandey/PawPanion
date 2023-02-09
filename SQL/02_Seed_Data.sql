@@ -13,8 +13,8 @@ insert into [User] ([Id], FirebaseUserId, [Name], Email, Phone, ImageLocation, i
 set identity_insert [User] off
 
 set identity_insert [Pet] on
-insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (1, 'Annie', 'Ragdoll/mix', '0', '2016-05-05', 3, '0', 'https://pasteboard.co/RTqrisoyChZm.png');
-insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (2, 'Lottie', 'Britney/Cocker Spaniel', '0', '2022-11-30', 3, '1', 'https://pasteboard.co/6AOGSiqa4fXP.png');
+insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (1, 'Annie', 'Ragdoll/mix', '0', '2016-05-05', 3, '0', 'https://www.dropbox.com/s/kkroxqyd1mynfhs/Annie.jpg?raw=1');
+insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (2, 'Lottie', 'Britney/Cocker Spaniel', '0', '2022-11-30', 3, '1', 'https://www.dropbox.com/s/ltnvs4w3nl44efd/Lottie.jpg?raw=1');
 insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (3, 'Banjo', 'Mountain Cur', '1', '2020-09-01', 4, '1', 'https://www.dogbreedslist.info/uploads/dog-pictures/mountain-cur-2.jpg');
 insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (4, 'Luna', 'mixed breed', '0', '2015-06-16', 7, '1', null);
 insert into [Pet] ([Id], [Name], Breed, IsMale, Birthdate, OwnerId, IsDog, ImageLocation) values (5, 'Baby Cat', 'Tortie mix', '0', '2019-11-10', 5, '0', null);
