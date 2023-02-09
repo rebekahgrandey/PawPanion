@@ -4,6 +4,7 @@ using System;
 using System.Security.Permissions;
 using PawPanion.Models;
 using PawPanion.Repositories;
+using System.Security.Claims;
 
 namespace PawPanion.Controllers
 {
@@ -50,5 +51,11 @@ namespace PawPanion.Controllers
             return CreatedAtAction(nameof(GetUser),
                 new { firebaseUserId = user.FirebaseUserId }, user);
         }
+
+        /* private User GetCurrentUser()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepository.GetByFirebaseUserId(firebaseUserId);
+        } */
     }
 }

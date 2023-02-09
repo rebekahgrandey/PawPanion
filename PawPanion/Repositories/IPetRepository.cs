@@ -8,8 +8,8 @@ namespace PawPanion.Repositories
         void Add(Pet pet);
         void Edit(Pet pet);
         List<Pet> GetAllPets();
+        List<Pet> GetUserPets(int userId);
         Pet GetPetById(int id);
-        Pet GetPetByOwnerId(int id);
         void Delete(int id);
     }
 }

@@ -32,18 +32,19 @@ namespace PawPanion.Controllers
                 NotFound();
             }
             return Ok(post);
-        } 
+        }
 
-        /*[HttpGet("{id}")]
-        public IActionResult GetPetByOwnerId(int id)
+        [HttpGet("UserPets")]
+        public IActionResult GetPetsByOwner(int id)
         {
-            var post = _petRepository.GetPetByOwnerId(id);
+            var currentUser = GetCurrentUser();
+            var post = _petRepository.GetUserPets(currentUser.Id); //.GetUserPets from PetRepository
             if (post != null)
             {
                 NotFound();
             }
             return Ok(post); 
-        } */
+        }
 
         [HttpGet]
         public ActionResult GetAll()
