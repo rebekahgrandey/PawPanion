@@ -58,9 +58,12 @@ export const AddPetForm = () => {
             copy[event.target.name] = event.target.value;
         }
 
+        //if (userInput.imageLocation === /*broken link*/) {
+        // userInput.imageLocation.copy[event.target.value] === null
+        //}
+
         setUserInput(copy);
     };
-
 
     return (
         <form className="ticketForm">
@@ -151,9 +154,7 @@ export const AddPetForm = () => {
             </fieldset>
             <button
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="submit_button"
-            >
-                Save
+                className="submit_button">Save
             </button>
         </form>
     );
