@@ -27,9 +27,9 @@ namespace PawPanion.Controllers
         public IActionResult GetPetById(int id)
         {
             var post = _petRepository.GetPetById(id);
-            if (post != null)
+            if (post == null)
             {
-                NotFound();
+                return NotFound();
             }
             return Ok(post);
         }
@@ -60,10 +60,10 @@ namespace PawPanion.Controllers
             return Ok (pet);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Pet pet)
+        [HttpPut("edit/{petId}")]
+        public IActionResult Put(int petId, Pet pet)
         {
-            if (id != pet.Id)
+            if (petId != pet.Id)
             {
                 return BadRequest();
             }

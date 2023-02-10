@@ -1,6 +1,6 @@
 import { getToken } from "./authManager";
 
-const baseUrl = '/api/pet';
+const baseUrl = "/api/pet";
 
 export const getAllPets = () => {
     return getToken().then((token) => {
@@ -83,9 +83,10 @@ export const getPetById = (id) => {
     });
 };
 
-export const editPet = (pet, id) => {
+export const editPet = (pet) => {
+    console.log(pet)
     return getToken().then((token) => {
-        return fetch(`${baseUrl}/${id}`, {
+        return fetch(`${baseUrl}/edit/${pet.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

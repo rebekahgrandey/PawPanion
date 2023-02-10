@@ -23,7 +23,7 @@ namespace PawPanion.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT p.Id AS PetId, p.Name AS PetName, Breed, IsMale, Birthdate, p.OwnerId, IsDog, p.ImageLocation, u.Name AS UserName, u.Id AS UserId, FirebaseUserId, Email, Phone, u.ImageLocation
+                       SELECT p.Id AS PetId, p.Name AS PetName, Breed, IsMale, Birthdate, p.OwnerId, IsDog, p.ImageLocation AS PetImage, u.Name AS UserName, u.Id AS UserId, FirebaseUserId, Email, Phone, u.ImageLocation AS UserImage
                        FROM Pet p
                        JOIN [User] u ON p.OwnerId = u.Id
                        ORDER BY u.Name
@@ -50,10 +50,10 @@ namespace PawPanion.Repositories
                                     Name = DbUtils.GetString(reader, "UserName"),
                                     Email = DbUtils.GetString(reader, "Email"),
                                     Phone = DbUtils.GetString(reader, "Phone"),
-                                    ImageLocation = DbUtils.GetString(reader, "ImageLocation")
+                                    ImageLocation = DbUtils.GetString(reader, "UserImage")
                                 },
                                 IsDog = reader.GetBoolean(reader.GetOrdinal("IsDog")),
-                                ImageLocation = DbUtils.GetString(reader, "ImageLocation")
+                                ImageLocation = DbUtils.GetString(reader, "PetImage")
                             };
 
 
@@ -92,7 +92,9 @@ namespace PawPanion.Repositories
                                 Breed = DbUtils.GetString(reader, "Breed"),
                                 IsMale = reader.GetBoolean(reader.GetOrdinal("IsMale")),
                                 Birthdate = DbUtils.GetDateTime(reader, "Birthdate"),
-                                OwnerId = DbUtils.GetInt(reader, "OwnerId")
+                                OwnerId = DbUtils.GetInt(reader, "OwnerId"),
+                                IsDog = reader.GetBoolean(reader.GetOrdinal("IsDog")),
+                                ImageLocation = DbUtils.GetString(reader, "ImageLocation")
                             };
                             return pet;
                         }
