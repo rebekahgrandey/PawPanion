@@ -49,10 +49,10 @@ export const addPet = (pet) => {
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(pet)
-        }).then((resp) => {
-            if (resp.ok) {
-                return resp.json();
-            } else if (resp.status === 401) {
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else if (res.status === 401) {
                 throw new Error("Unauthorized");
             } else {
                 throw new Error(
@@ -96,4 +96,21 @@ export const editPet = (pet) => {
         });
     });
 
+};
+
+export const deletePet = (petId) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/delete/${petId}`, {
+            method: "Delete",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (!res.ok) {
+                throw new Error(
+                    "An unknown error occurred."
+                );
+            }
+        });
+    });
 };

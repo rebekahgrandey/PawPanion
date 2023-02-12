@@ -72,10 +72,10 @@ namespace PawPanion.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("delete/{petId}")]
+        public IActionResult Delete(int petId)
         {
-            _petRepository.Delete(id);
+            _petRepository.Delete(petId);
             return NoContent();
         }
 

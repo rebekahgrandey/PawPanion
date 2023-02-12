@@ -5,6 +5,7 @@ import Register from "./Register";
 import { HomePage } from "./userViews/HomePage";
 import { AddPetForm } from "./Pets/AddPet";
 import { EditPetForm } from "./Pets/EditPet";
+import { DeletePetPage } from "./Pets/DeletePet";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -19,7 +20,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                     <Route path="add-pet" element={<AddPetForm />} />
                     <Route path="pet/edit/:petId" element={<EditPetForm />} />
-
+                    <Route path="pet/delete/:petId" element={<DeletePetPage />} />
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
