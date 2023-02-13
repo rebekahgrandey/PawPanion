@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using PawPanion.Models;
 using PawPanion.Utils;
+using System.Buffers;
 
 namespace PawPanion.Repositories
 {
@@ -10,7 +11,7 @@ namespace PawPanion.Repositories
     {
         public RecordRepository(IConfiguration configuration) : base(configuration) { }
 
-        public Record GetPetRecords(int id)
+        public List<Record> GetPetRecordsByPetId(int petId)
         {
             using (var conn = Connection)
             {
@@ -21,21 +22,25 @@ namespace PawPanion.Repositories
                        SELECT r.Id AS RecordId, r.RecordTypeId, r.PetId AS RecordPetId, r.VetId AS RVetId, r.Date, Weight, Medication, Illness,
                        Diet, Note,
                        rt.Id AS RTId, rt.Name AS RecordTypeName,
-                       p.Id AS PetId, p.Name AS PetName, p.ImageLocation AS PetImageLocation,
-                       v.Id AS VetId, v.Name AS VetName, v.ImageLocation AS VetImageLocation
+                       p.Id AS PetId, p.Name AS PetName, Breed, IsMale, Birthdate, p.OwnerId AS PetOwnerId, p.IsDog, p.ImageLocation AS PetImageLocation,
+                       v.Id AS VetId, v.Name AS VetName, v.ImageLocation AS VetImageLocation, v.Email AS VetEmail, v.Phone AS VetPhone, v.IsVet AS VetIsVet,
+                       o.Id AS OwnerId, o.Name AS OwnerName, o.Email AS OwnerEmail, o.Phone AS OwnerPhone, o.ImageLocation AS OwnerImageLocation, o.IsVet AS OwnerIsVet
                        FROM Record r
                        JOIN Pet p ON p.Id = r.PetId
                        JOIN RecordType rt ON r.RecordTypeId = rt.Id
                        JOIN [User] v ON r.VetId = v.Id
-                       WHERE r.PetId = @Id";  //ADD IN THINGS THAT ARENT SHOWING IN SWAGGER
+                       JOIN [User] o ON p.OwnerId = o.Id
+                       WHERE r.PetId = @Id";
 
-                    DbUtils.AddParameter(cmd, "@Id", id);
+                    DbUtils.AddParameter(cmd, "@Id", petId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        List<Record> records = new();
+                        
+                        while (reader.Read())
                         {
-                            Record record = new Record
+                            records.Add(new Record()
                             {
                                 Id = DbUtils.GetInt(reader, "RecordId"),
                                 RecordTypeId = DbUtils.GetInt(reader, "RecordTypeId"),
@@ -49,13 +54,31 @@ namespace PawPanion.Repositories
                                 {
                                     Id = DbUtils.GetInt(reader, "PetId"),
                                     Name = DbUtils.GetString(reader, "PetName"),
+                                    Breed = DbUtils.GetString(reader, "Breed"),
+                                    IsMale = reader.GetBoolean(reader.GetOrdinal("IsMale")),
+                                    Birthdate = DbUtils.GetDateTime(reader, "Birthdate"),
+                                    OwnerId = DbUtils.GetInt(reader, "PetOwnerId"),
+                                    //Owner = new User()
+                                    //{
+                                    //    Id = DbUtils.GetInt(reader, "OwnerId"),
+                                    //    Name = DbUtils.GetString(reader, "OwnerName"),
+                                    //    Email = DbUtils.GetString(reader, "OwnerEmail"),
+                                    //    Phone = DbUtils.GetString(reader, "OwnerPhone"),
+                                    //    ImageLocation = DbUtils.GetString(reader, "OwnerImageLocation"),
+                                    //    IsVet = reader.GetBoolean(reader.GetOrdinal("OwnerIsVet"))
+                                    //},
+                                    IsDog = reader.GetBoolean(reader.GetOrdinal("IsDog")),
                                     ImageLocation = DbUtils.GetString(reader, "PetImageLocation")
                                 },
                                 VetId = DbUtils.GetInt(reader, "RVetId"),
                                 Vet = new User()
                                 {
                                     Id = DbUtils.GetInt(reader, "VetId"),
-                                    Name = DbUtils.GetString(reader, "VetName")
+                                    Name = DbUtils.GetString(reader, "VetName"),
+                                    ImageLocation = DbUtils.GetString(reader, "VetImageLocation"),
+                                    Email = DbUtils.GetString(reader, "VetEmail"),
+                                    Phone = DbUtils.GetString(reader, "VetPhone"),
+                                    IsVet = reader.GetBoolean(reader.GetOrdinal("VetIsVet"))
                                 },
                                 Date = DbUtils.GetDateTime(reader, "Date"),
                                 Weight = (float)reader.GetDouble(reader.GetOrdinal("Weight")),
@@ -63,10 +86,9 @@ namespace PawPanion.Repositories
                                 Illness = DbUtils.GetString(reader, "Illness"),
                                 Diet = DbUtils.GetString(reader, "Diet"),
                                 Note = DbUtils.GetString(reader, "Note")
-                            };
-                            return record;
+                            });
                         }
-                        return null;
+                        return records;
                     }
                 }
             }
