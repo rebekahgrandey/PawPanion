@@ -1,9 +1,10 @@
 ﻿using PawPanion.Models;
+using System.Collections.Generic;
 
 namespace PawPanion.Repositories
 {
     public interface IRecordRepository
     {
-        Record GetPetRecords(int id);
+        List<Record> GetPetRecordsByPetId(int petId);
     }
 }

@@ -22,7 +22,7 @@ namespace PawPanion.Controllers
         [HttpGet("{petId}")]
         public IActionResult GetRecordsByPetId(int petId)
         {
-            var post = _recordRepository.GetPetRecords(petId);
+            var post = _recordRepository.GetPetRecordsByPetId(petId);
             if (post == null)
             {
                 NotFound();
