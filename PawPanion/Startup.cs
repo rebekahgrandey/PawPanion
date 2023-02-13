@@ -28,6 +28,7 @@ namespace PawPanion
         {
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPetRepository, PetRepository>();
+            services.AddTransient<IRecordRepository, RecordRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
