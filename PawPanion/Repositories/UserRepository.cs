@@ -93,15 +93,15 @@ namespace PawPanion.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO User (FirebaseUserId, Name, Email, Phone, ImageLocation, IsVet)
+                    cmd.CommandText = @"INSERT INTO [User] (FirebaseUserId, Name, Email, Phone, ImageLocation, IsVet)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @Name, @Email)";
+                                        VALUES (@FirebaseUserId, @Name, @Email, @Phone, @ImageLocation, @IsVet)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", user.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@Name", user.Name);
                     DbUtils.AddParameter(cmd, "@Email", user.Email);
-                    DbUtils.AddParameter(cmd, "Phone", user.Phone);
-                    DbUtils.AddParameter(cmd, "ImageLocation", user.ImageLocation);
-                    DbUtils.AddParameter(cmd, "IsVet", user.IsVet);
+                    DbUtils.AddParameter(cmd, "@Phone", user.Phone);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", user.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@IsVet", user.IsVet);
 
                     user.Id = (int)cmd.ExecuteScalar();
                 }
