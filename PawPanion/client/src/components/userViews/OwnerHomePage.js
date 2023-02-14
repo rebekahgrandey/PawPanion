@@ -40,7 +40,7 @@ export const OwnerHomePage = () => {
                         <Button onClick={() => { navigate(`pet/edit/${pet.id}`) }}>Edit</Button>
                         <Button onClick={() => { navigate(`pet/delete/${pet.id}`) }}>Delete</Button>
                     </div>
-                    <div><Link to={``}>View All Records</Link></div>
+                    <div><Link to={`record/${pet.id}`}>View All Records</Link></div>
                 </div>
             })}
         </div>

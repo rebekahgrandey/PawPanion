@@ -58,15 +58,6 @@ namespace PawPanion.Repositories
                                     IsMale = reader.GetBoolean(reader.GetOrdinal("IsMale")),
                                     Birthdate = DbUtils.GetDateTime(reader, "Birthdate"),
                                     OwnerId = DbUtils.GetInt(reader, "PetOwnerId"),
-                                    //Owner = new User()
-                                    //{
-                                    //    Id = DbUtils.GetInt(reader, "OwnerId"),
-                                    //    Name = DbUtils.GetString(reader, "OwnerName"),
-                                    //    Email = DbUtils.GetString(reader, "OwnerEmail"),
-                                    //    Phone = DbUtils.GetString(reader, "OwnerPhone"),
-                                    //    ImageLocation = DbUtils.GetString(reader, "OwnerImageLocation"),
-                                    //    IsVet = reader.GetBoolean(reader.GetOrdinal("OwnerIsVet"))
-                                    //},
                                     IsDog = reader.GetBoolean(reader.GetOrdinal("IsDog")),
                                     ImageLocation = DbUtils.GetString(reader, "PetImageLocation")
                                 },
@@ -90,6 +81,48 @@ namespace PawPanion.Repositories
                         }
                         return records;
                     }
+                }
+            }
+        }
+
+
+
+        public void Add(Record record)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Record (RecordTypeId, PetId, VetId, Date, Weight, Medication, Illness, Diet, Note)
+                        OUTPUT INSERTED.ID
+                        VALUES (@recordTypeId, @petId, @vetId, @date, @weight, @medication, @illness, @diet, @note)";
+                    cmd.Parameters.AddWithValue("@recordTypeId", record.RecordTypeId);
+                    cmd.Parameters.AddWithValue("@petId", record.PetId);
+                    cmd.Parameters.AddWithValue("@vetId", record.VetId);
+                    cmd.Parameters.AddWithValue("@date", record.Date);
+                    cmd.Parameters.AddWithValue("@weight", record.Weight);
+                    cmd.Parameters.AddWithValue("@medication", record.Medication);
+                    cmd.Parameters.AddWithValue("@illness", record.Illness);
+                    cmd.Parameters.AddWithValue("@diet", record.Diet);
+                    cmd.Parameters.AddWithValue("@note", record.Note);
+
+                    record.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Record WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

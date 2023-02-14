@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { getPetRecordsById } from "../../modules/recordManager";
@@ -15,9 +15,8 @@ export const RecordsByPetId = () => {
 
     return (
         <>
-            <button onClick={() => navigate(`/`)}>
-                Return to Homepage
-            </button>
+            <div><Link to={``}><h2>+ Add New Record</h2></Link></div>
+            <Link to={`/`}><h3>return to Homepage</h3></Link>
             <h1>All Records</h1>
             {records.map((record) => {
                 return <div key={record.id}>
@@ -30,7 +29,7 @@ export const RecordsByPetId = () => {
                         {record?.illness ? <h3>Illnesses: {record?.illness}</h3> : ""}
                         {record?.diet ? <h3>Dietary Notes: {record?.diet}</h3> : ""}
                         {record?.note ? <h3>Additional Info: {record?.note}</h3> : ""}
-                        <h3>Seen by {record?.vet?.name}</h3>
+                        <h3>Seen by <img style={{ width: 40 }} src={record?.vet?.imageLocation} /> {record?.vet?.name}</h3>
 
                     </div>
                 </div>
