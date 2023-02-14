@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { getPetRecordsById } from "../../modules/recordManager";
+import { getCurrentUserByFirebaseId } from "../../modules/userManager";
 
 export const RecordsByPetId = () => {
     const [records, setRecords] = useState([])
-    const navigate = useNavigate()
+    const [user, setUser] = useState([])
     const { petId } = useParams()
+    const currentFirebaseUser = firebase.auth().currentUser.uid
 
     useEffect(() => {
         getPetRecordsById(petId).then(records => setRecords(records));
     }, [])
 
+    useEffect(() => {
+        getCurrentUserByFirebaseId(currentFirebaseUser).then(user => setUser(user));
+    }, [])
+
     return (
         <>
-            <div><Link to={``}><h2>+ Add New Record</h2></Link></div>
+            {user.isVet ? <div><Link to={`/record/add/${petId}`}><h2>+ Add New Record</h2></Link></div> : ""}
             <Link to={`/`}><h3>return to Homepage</h3></Link>
             <h1>All Records</h1>
             {records.map((record) => {
@@ -30,6 +36,7 @@ export const RecordsByPetId = () => {
                         {record?.diet ? <h3>Dietary Notes: {record?.diet}</h3> : ""}
                         {record?.note ? <h3>Additional Info: {record?.note}</h3> : ""}
                         <h3>Seen by <img style={{ width: 40 }} src={record?.vet?.imageLocation} /> {record?.vet?.name}</h3>
+                        {user.isVet ? <div><Link to={`/record/delete/${record.id}`}><h3>Delete Record</h3></Link></div> : ""}
 
                     </div>
                 </div>

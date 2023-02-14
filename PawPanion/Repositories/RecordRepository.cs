@@ -30,7 +30,8 @@ namespace PawPanion.Repositories
                        JOIN RecordType rt ON r.RecordTypeId = rt.Id
                        JOIN [User] v ON r.VetId = v.Id
                        JOIN [User] o ON p.OwnerId = o.Id
-                       WHERE r.PetId = @Id";
+                       WHERE r.PetId = @Id
+                       ORDER BY Date DESC";
 
                     DbUtils.AddParameter(cmd, "@Id", petId);
 
@@ -120,7 +121,7 @@ namespace PawPanion.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Record WHERE Id = @Id";
+                    cmd.CommandText = "DELETE FROM Record WHERE Id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();
                 }

@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const _apiUrl = "/api/user";
 export const getToken = () => firebase.auth().currentUser.getIdToken();
