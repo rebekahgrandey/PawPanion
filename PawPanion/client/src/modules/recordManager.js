@@ -20,3 +20,44 @@ export const getPetRecordsById = (petId) => {
         });
     });
 };
+
+export const addRecord = (record) => {
+    return getToken().then((token) => {
+        return fetch(baseUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(record)
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else if (res.status === 401) {
+                throw new Error("Unauthorized");
+            } else {
+                throw new Error(
+                    "An unknown error occurred.",
+                );
+            }
+        });
+
+    })
+};
+
+export const deleteRecord = (recordId) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/delete/${recordId}`, {
+            method: "Delete",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (!res.ok) {
+                throw new Error(
+                    "An unknown error occurred."
+                );
+            }
+        });
+    });
+};

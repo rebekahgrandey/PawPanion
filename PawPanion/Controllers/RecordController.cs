@@ -29,5 +29,19 @@ namespace PawPanion.Controllers
             }
             return Ok(post);
         }
+
+        [HttpPost]
+        public IActionResult Post(Record record)
+        {
+            _recordRepository.Add(record);
+            return Ok(record);
+        }
+
+        [HttpDelete("delete/{petId}")]
+        public IActionResult Delete(int petId)
+        {
+            _recordRepository.Delete(petId);
+            return NoContent();
+        }
     }
 }
