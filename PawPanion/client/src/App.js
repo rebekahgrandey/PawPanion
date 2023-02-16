@@ -4,6 +4,7 @@ import { Spinner } from 'reactstrap';
 import ApplicationViews from "./components/ApplicationViews";
 import { onLoginStatusChange } from "./modules/authManager";
 import Header from "./components/Header";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { VetHomePage } from "./VetHomePage";
 import { OwnerHomePage } from "./OwnerHomePage";
 import { getCurrentUserByFirebaseId } from "../../modules/userManager";
+import "./HomePage.css"
 
 export const HomePage = () => {
     const [user, setUser] = useState([])
@@ -26,6 +27,7 @@ export const HomePage = () => {
 
     return (
         <nav>
+            <h2 className="welcome-user">Welcome back, {user.name}</h2>
             {homePage}
         </nav>
     );

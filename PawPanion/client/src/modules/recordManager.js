@@ -80,3 +80,42 @@ export const getRecordById = (id) => {
         });
     });
 };
+
+export const getAllRecords = () => {
+    return getToken().then((token) => {
+        return fetch(baseUrl, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(
+                    "An unknown error occurred.",
+                );
+            }
+        });
+    });
+};
+
+
+// export const getNewestRecordByPetId = (pet) => {
+//     return getToken().then((token) => {
+//         return fetch(`${baseUrl}/most-recent/${pet.id}`, {
+//             method: "GET",
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//             },
+//         }).then((res) => {
+//             if (res.ok) {
+//                 return res.json();
+//             } else {
+//                 throw new Error(
+//                     "An unknown error occured.",
+//                 );
+//             }
+//         });
+//     });
+// };
