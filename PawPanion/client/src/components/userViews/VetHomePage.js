@@ -2,6 +2,7 @@ import { getAllPets } from "../../modules/petManager";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "reactstrap";
+import "./HomePage.css"
 
 export const VetHomePage = () => {
     const [pets, setPets] = useState([]);
@@ -16,15 +17,20 @@ export const VetHomePage = () => {
     }, []);
 
     return (
-        <div className="pet-container">
-            <div className="row justify-content-center">
-                {pets.map((pet) => {
-                    return <Card key={pet.id}><div className="pet-list-container">
-                        <div>{pet.owner.name} {pet.owner.phone} {pet.name} <img style={{ width: 40 }} src={pet.imageLocation} />
-                            <Button onClick={() => { navigate(`record/${pet.id}`) }}>View Records</Button></div></div>
-                    </Card>
-                })}
-            </div>
+
+        <div className="vetHomeContainer">
+            {pets.map((pet) => {
+                return (
+                    <div className="pet-list-container" key={pet.id}>
+                        <div className="pet-list-container-owner"><div style={{ marginRight: "2rem" }}>{pet.owner.name}</div> <div>{pet.owner.phone}</div></div>
+                        <div>{pet.name} <img style={{ width: 40 }} src={pet.imageLocation} />
+                            <Button onClick={() => { navigate(`record/${pet.id}`) }}>View Records</Button>
+                        </div>
+
+                    </div>
+                )
+            })}
         </div>
+
     )
 }

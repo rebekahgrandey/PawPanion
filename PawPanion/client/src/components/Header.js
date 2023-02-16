@@ -29,7 +29,7 @@ export default function Header({ isLoggedIn }) {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
+            <Navbar color="light" light expand="md" className="py-4">
                 <NavbarBrand tag={RRNavLink} to="/">Pawpanion</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>

@@ -30,6 +30,28 @@ namespace PawPanion.Controllers
             return Ok(post);
         }
 
+        [HttpGet]
+        public IActionResult GetAllByDate()
+        {
+            var post = _recordRepository.GetAllRecordsByDate();
+            if (post == null)
+            {
+                NotFound();
+            }
+            return Ok(post);
+        }
+
+        //[HttpGet("most-recent/{petId}")]
+        //public IActionResult NewestRecordByPetId(int id)
+        //{
+        //    var post = _recordRepository.MostRecentRecordByPetId(id);
+        //    if (post == null)
+        //    {
+        //        NotFound();
+        //    }
+        //    return Ok(post);
+        //}
+
         [HttpPost]
         public IActionResult Post(Record record)
         {

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body {
+    /* background-image: url("paper.gif"); */
+    background-size: cover;
+    background: linear-gradient(180deg, rgba(102, 153, 255, 1) 35%, rgba(42, 113, 255, 1) 100%) no-repeat center fixed !important;
+}
+
+.welcome-user {
+    color: rgb(255, 255, 255);
+    padding: 1.5rem rem 0 0 3rem;
+    margin-top: 3rem;
+    margin-left: 3.7rem;
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
+
+.homepage-labels {
+    color: rgb(255, 255, 255);
+    padding: 1.5rem rem 0 0 3rem;
+    margin-top: 3rem;
+    margin-left: 3.7rem;
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    letter-spacing: 1px;
+}
+
+.vetHomeContainer {
+    margin: auto;
+    max-width: 900px;
+    border: black solid 2px;
+}
+
+.pet-container {
+    margin-left: 3rem !important;
+    margin-top: 1px !important;
+}
+
+.pet-list-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8rem;
+}
+
+.pet-list-container-owner {
+    display: flex;
+}
+
+.add-pet {
+    font-size: 2rem;
+    margin: auto;
+    margin-bottom: 320px;
+    margin-left: 1.7rem;
+}
+
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+/* a:hover {
+    background-color: yellow;
+    transition: all .2s ease-in-out;
+} */
