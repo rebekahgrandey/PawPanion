@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
+import "./Records/AddRecord.css"
 
 export default function Login() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function Login() {
     };
 
     return (
-        <Form onSubmit={loginSubmit}>
+        <Form onSubmit={loginSubmit} className="form-container mt-4 p-5">
             <fieldset>
                 <FormGroup>
                     <Label for="email">Email</Label>

@@ -5,6 +5,7 @@ import "firebase/auth";
 import { getCurrentUserByFirebaseId } from "../../modules/userManager";
 import { addRecord } from "../../modules/recordManager";
 import { getPetById } from "../../modules/petManager";
+import "./AddRecord.css"
 
 export const AddRecordForm = () => {
     const currentFirebaseUser = firebase.auth().currentUser.uid
@@ -49,7 +50,7 @@ export const AddRecordForm = () => {
             vetInput.date
         ) {
             return addRecord(newRecord)
-                .then(() => navigate("/"));
+                .then(() => navigate(`/record/${petId}`));
         } else {
             alert("Please complete the form");
         }
@@ -63,7 +64,7 @@ export const AddRecordForm = () => {
     };
 
     return (
-        <form className="ticketForm">
+        <form className="form-container mt-5">
             <h2 className="ticketForm__title"><img style={{ width: 40 }} src={pet.imageLocation} /> {pet.name} | Add Record</h2>
             <fieldset>
                 <div className="form-group">
@@ -179,8 +180,9 @@ export const AddRecordForm = () => {
                 </div>
             </fieldset>
             <button
+                style={{ borderRadius: "20px" }}
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="submit_button">Add Record
+                className="submit_button mt-3 px-3 py-1">Add Record
             </button>
         </form>
     );

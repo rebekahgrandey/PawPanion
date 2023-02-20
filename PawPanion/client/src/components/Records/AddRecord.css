@@ -1,0 +1,23 @@
+.form-container {
+    border-radius: 20px;
+    background-color: white;
+    padding: 30px;
+    margin-left: 20px;
+    width: 40rem;
+}
+
+.nav-extender {
+    height: 100%;
+}
+
+.add-label {
+    font-family: 'Fredoka One', cursive;
+}
+
+.field-input {
+    border: 2px solid blue;
+    border-radius: 10px;
+    margin: 6px 0 6px;
+    padding: 5px;
+    width: 20rem;
+}

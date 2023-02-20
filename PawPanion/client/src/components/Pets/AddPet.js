@@ -4,6 +4,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { getCurrentUserByFirebaseId } from "../../modules/userManager";
 import { addPet } from "../../modules/petManager";
+import "./AddPet.css"
 
 export const AddPetForm = () => {
     const currentFirebaseUser = firebase.auth().currentUser.uid
@@ -66,96 +67,104 @@ export const AddPetForm = () => {
     };
 
     return (
-        <form className="ticketForm">
-            <h2 className="ticketForm__title">Add a Furry Friend</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Pet Name: </label>
-                    <input
-                        required
-                        autoFocus
-                        name="name"
-                        type="string"
-                        className="form-control"
-                        placeholder="Your furry friend's name"
-                        value={userInput.name}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="breed">Breed: </label>
-                    <input
-                        required
-                        autoFocus
-                        name="breed"
-                        type="string"
-                        className="form-control"
-                        placeholder="ex. mixed breed"
-                        value={userInput.imageUrl}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="isMale">Is your pet Male?: </label>
-                    <input
-                        autoFocus
-                        name="isMale"
-                        type="checkbox"
-                        className="form-control"
-                        value={userInput.isMale}
-                        onChange={handleInputChange}
-                    />Yes
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="birthdate">{`Date of Birth (or close estimate):`}</label>
-                    <input
-                        required
-                        autoFocus
-                        name="birthdate"
-                        type="date"
-                        className="form-control"
-                        value={userInput.birthdate}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="isDog">{`Is your pet a dog? (otherwise we will call it a cat).`}</label>
-                    <input
-                        autoFocus
-                        name="isDog"
-                        type="checkbox"
-                        className="form-control"
-                        value={userInput.isDog}
-                        onChange={handleInputChange}
-                    />Yes
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="imageLocation">Profile Image URL: </label>
-                    <input
-                        autoFocus
-                        name="imageLocation"
-                        type="text"
-                        className="form-control"
-                        placeholder="http://www.pet.com/yourpet"
-                        value={userInput.imageLocation}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="submit_button">Save
-            </button>
-        </form>
+        <div className="nav-extender">
+            <form className="form-container mt-5">
+                <h2 className="add-label">Add a Furry Friend</h2>
+                <fieldset>
+                    <div className="">
+                        <label htmlFor="name">Pet Name: </label>
+                        <div><input
+                            required
+                            autoFocus
+                            name="name"
+                            type="string"
+                            className="field-input"
+                            placeholder="Your furry friend's name"
+                            value={userInput.name}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="">
+                        <label htmlFor="breed">Breed: </label>
+                        <div><input
+                            required
+                            autoFocus
+                            name="breed"
+                            type="string"
+                            className="field-input"
+                            placeholder="ex. mixed breed"
+                            value={userInput.imageUrl}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="">
+                        <label htmlFor="isMale">Is your pet Male?: </label>
+                        <input
+                            autoFocus
+                            name="isMale"
+                            type="checkbox"
+                            className="mt-3 mb-3"
+                            value={userInput.isMale}
+                            onChange={handleInputChange}
+                        />Yes
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="">
+                        <label htmlFor="birthdate">{`Date of Birth (or close estimate):`}</label>
+                        <div>
+                            <input
+                                required
+                                autoFocus
+                                name="birthdate"
+                                type="date"
+                                className="field-input"
+                                value={userInput.birthdate}
+                                onChange={handleInputChange}
+                            /></div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="">
+                        <label htmlFor="isDog">{`Is your pet a dog? (otherwise we will call it a cat).`}</label>
+                        <input
+                            autoFocus
+                            name="isDog"
+                            type="checkbox"
+                            className="mt-3 mb-3"
+                            value={userInput.isDog}
+                            onChange={handleInputChange}
+                        />Yes
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="">
+                        <label htmlFor="imageLocation">Profile Image URL: </label>
+                        <div>
+                            <input
+                                autoFocus
+                                name="imageLocation"
+                                type="text"
+                                className="field-input"
+                                placeholder="http://www.pet.com/yourpet"
+                                value={userInput.imageLocation}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                </fieldset>
+                <button
+                    style={{ borderRadius: "10px" }}
+                    onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                    className="submit_button px-2 py-1 mt-3">Add Pet
+                </button>
+            </form>
+        </div>
     );
 };

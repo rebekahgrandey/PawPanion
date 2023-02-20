@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 import { register } from "../modules/authManager";
+import "./Records/AddRecord.css"
 
 export default function Register() {
     const navigate = useNavigate();
@@ -31,7 +32,8 @@ export default function Register() {
     };
 
     return (
-        <Form onSubmit={registerClick}>
+        <Form onSubmit={registerClick} className="form-container mt-4">
+            <a href={`/login`} style={{ textDecoration: "none" }}>Return to Login</a>
             <fieldset>
                 <FormGroup>
                     <Label htmlFor="name">Full Name</Label>

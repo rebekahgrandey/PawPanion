@@ -1,0 +1,9 @@
+.userNav {
+    width: 250px;
+    margin-right: 100px;
+    background-color: white !important
+}
+
+li {
+    list-style-type: none;
+}

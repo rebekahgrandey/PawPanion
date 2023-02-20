@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 import { getCurrentUserByFirebaseId } from '../modules/userManager';
 import { logout } from '../modules/authManager';
+import "./Header.css"
 
 
 export default function Header({ isLoggedIn }) {
@@ -28,50 +29,78 @@ export default function Header({ isLoggedIn }) {
     }, [isLoggedIn]);
 
     return (
-        <div>
-            <Navbar color="light" light expand="md" className="py-4">
-                <NavbarBrand tag={RRNavLink} to="/">Pawpanion</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
-                        { /* When isLoggedIn === true, we will render the Home link */}
-                        {isLoggedIn &&
-                            <>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/">Home</NavLink>
-                                </NavItem>
-                                {user && !user.isVet ? <NavItem>
-                                    <NavLink tag={RRNavLink} to="/add-pet">Add a Pet</NavLink>
-                                </NavItem> : ""}
-                            </>
-                        }
-                    </Nav>
 
-                    <Nav navbar>
-                        {isLoggedIn &&
-                            <>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/" onClick={(e) => {
-                                        setUser();
-                                        logout(e);
-                                    }}>Logout</NavLink>
-                                </NavItem>
-                            </>
-                        }
-                        {!isLoggedIn &&
-                            <>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/login">Login</NavLink>
-                                </NavItem>
+        <Navbar color="light" light expand="md" className="py-4">
+            <NavbarBrand tag={RRNavLink} to="/">Pawpanion</NavbarBrand>
+            <NavbarToggler onClick={toggle} />
+            <Collapse isOpen={isOpen} navbar>
+                <Nav className="mr-auto" navbar>
 
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/register">Register</NavLink>
-                                </NavItem>
-                            </>
-                        }
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        </div>
+                    {isLoggedIn &&
+                        <>
+                            <NavItem>
+                                <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                            </NavItem>
+                            {user && !user.isVet ? <NavItem>
+                                <NavLink tag={RRNavLink} to="/add-pet">Add a Pet</NavLink>
+                            </NavItem> : ""}
+                        </>
+                    }
+                </Nav>
+
+                <Nav navbar>
+                    {isLoggedIn &&
+                        <>
+                            <NavItem>
+                                <NavLink tag={RRNavLink} to="/" onClick={(e) => {
+                                    setUser();
+                                    logout(e);
+                                }}>Logout</NavLink>
+                            </NavItem>
+                        </>
+                    }
+                    {!isLoggedIn &&
+                        <>
+                            <NavItem>
+                                <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+                            </NavItem>
+
+                            <NavItem>
+                                <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+                            </NavItem>
+                        </>
+                    }
+                </Nav>
+            </Collapse>
+        </Navbar>
+
     );
 }
+
+
+
+
+
+
+
+
+
+{/* <div className="userNav">
+            <div className="userNav-content"> Pawpanion logo
+
+                {isLoggedIn &&
+                    <>
+                        <ul>
+                            <li><a style={{ textDecoration: "none" }} href="/">Home</a></li>
+
+                            <li><a style={{ textDecoration: "none" }} href="/add-pet">Add a Pet</a></li>
+
+                            <li><a style={{ textDecoration: "none" }} href="/" onClick={(e) => {
+                                setUser();
+                                logout(e);
+                            }}>Logout</a></li>
+                        </ul>
+                    </>
+                }
+            </div>
+        </div> */}
