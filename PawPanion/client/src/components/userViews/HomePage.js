@@ -26,9 +26,9 @@ export const HomePage = () => {
     }
 
     return (
-        <nav>
+        <>
             <h2 className="welcome-user">Welcome back, {user.name}</h2>
             {homePage}
-        </nav>
+        </>
     );
 }

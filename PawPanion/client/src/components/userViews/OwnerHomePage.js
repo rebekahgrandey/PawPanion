@@ -23,81 +23,79 @@ export const OwnerHomePage = () => {
     const randomFact = factGenerator()
 
     return (<>
-        <div className="homepage-labels">Did you know?</div>
-        {randomFact}
-        <div className="homepage-labels">Your Pets</div>
-        <div className="pet-container row row-cols-3">
+        <div className="">
+            <div className="pet-fact-container"><div className="owner-homepage-labels">Did you know?</div>
+                <Card
+                    border='light border border-2'
+                    style={{ width: '40rem' }}
+                    bg='light'
+                    text='black'
+                    className="shadow p-4 card-left">{randomFact}</Card></div>
+            <div className="owner-homepage-labels">Your Pets</div>
+            <div className="pet-container row row-cols-3">
 
-            {ownerPets.map((pet) => {
+                {ownerPets.map((pet) => {
 
-                const petRecord = records.find(record => record.petId === pet.id)
-
-                //const petPic = pet.imageLocation
-
-
-                // if (!pet.imageLocation && pet.isDog) {
-                //     petPic === //DEFAULT DOG PIC URL
-                // } else if (!pet.imageLocation && !pet.isDog) {
-                //     petPic === //DEFAULT CAT PIC URL
-                // } else {
-                //     petPic === pet.imageLocation
-                // }
+                    const petRecord = records.find(record => record.petId === pet.id)
 
 
+                    var petDate = pet.birthdate;
+                    petDate = petDate.split('T')[0];
 
-                var petDate = pet.birthdate;
-                petDate = petDate.split('T')[0];
+                    return (<>
 
-                return (<>
+                        <Card
+                            border='light border border-2 m-3'
+                            style={{ width: '18rem' }}
+                            key={pet.id}
+                            bg='light'
+                            text='black'
+                            className="shadow p-4">
+                            <Card.Img className="rounded-circle border border-5 mx-auto" variant="top" style={{ width: '12rem' }} src={pet.imageLocation} />
+                            <Card.Body className="mx-auto text-center">
+                                <Card.Title className="mb-3 fs-3">{pet.name}</Card.Title>
+                                <Card.Text className="mb-2">DOB: {petDate}</Card.Text>
 
-                    <Card
-                        border='light border border-2 m-3'
-                        style={{ width: '18rem' }}
-                        key={pet.id}
-                        bg='light'
-                        text='black'
-                        className="shadow p-4">
-                        <Card.Img className="rounded-circle border border-5 mx-auto" variant="top" style={{ width: '12rem' }} src={pet.imageLocation} />
-                        <Card.Body className="mx-auto text-center">
-                            <Card.Title className="mb-3 fs-3">{pet.name}</Card.Title>
-                            <Card.Text className="mb-2">DOB: {petDate}</Card.Text>
-
-                            <Card.Text>{pet.breed}</Card.Text>
-                            <Card.Text>
-                                {petRecord?.weight ? `Weight: ${petRecord?.weight}` : ""}
-                            </Card.Text>
-                            <Card.Text>
-                                {petRecord?.medication ? `Recent medication(s): ${petRecord?.medication}` : ""}
-                            </Card.Text>
-                            <Card.Text>
-                                {petRecord?.illness ? `Recent conditions: ${petRecord?.illness}` : ""}
-                            </Card.Text>
-                            <Card.Text>
-                                {petRecord?.diet ? `Diet plan: ${petRecord?.diet}` : ""}
-                            </Card.Text>
-                            <Card.Text>
-                                {petRecord?.note ? `Most recent vet notes:
+                                <Card.Text>{pet.breed}</Card.Text>
+                                <Card.Text>
+                                    {petRecord?.weight ? `Weight: ${petRecord?.weight}` : ""}
+                                </Card.Text>
+                                <Card.Text>
+                                    {petRecord?.medication ? `Recent medication(s): ${petRecord?.medication}` : ""}
+                                </Card.Text>
+                                <Card.Text>
+                                    {petRecord?.illness ? `Recent conditions: ${petRecord?.illness}` : ""}
+                                </Card.Text>
+                                <Card.Text>
+                                    {petRecord?.diet ? `Diet plan: ${petRecord?.diet}` : ""}
+                                </Card.Text>
+                                <Card.Text>
+                                    {petRecord?.note ? `Most recent vet notes:
                                 ${petRecord?.note}
                                 Submitted on ${petRecord?.date}` : ""}
-                            </Card.Text>
+                                </Card.Text>
 
-                            <Button onClick={() => { navigate(`record/${pet.id}`) }}>View Records</Button>
-                        </Card.Body>
-                        <Button className="m" variant="dark" onClick={() => { navigate(`pet/edit/${pet.id}`) }}>Edit</Button>
-                        <Button variant="light" onClick={() => { navigate(`pet/delete/${pet.id}`) }}>Delete</Button>
+                                <Button onClick={() => { navigate(`record/${pet.id}`) }}>View Records</Button>
+                            </Card.Body>
+                            <Button className="m" variant="dark" onClick={() => { navigate(`pet/edit/${pet.id}`) }}>Edit</Button>
+                            <Button variant="light" onClick={() => { navigate(`pet/delete/${pet.id}`) }}>Delete</Button>
 
-                    </Card>
-                </>
-                )
-            })}
-            <Card
-                border='light border border-2 m-3'
-                style={{ width: '18rem' }}
-                bg='light'
-                text='black'
-                className="shadow p-4">
-                <div className="add-pet grow hover"><Link to="/add-pet" style={{ textDecoration: 'none' }}>+ add a pet</Link></div>
-            </Card>
+                        </Card>
+                    </>
+                    )
+                })}
+                <Card
+                    border='light border border-2 m-3'
+                    style={{ width: '18rem' }}
+                    bg='light'
+                    text='black'
+                    className="shadow p-4">
+                    <div className="add-pet grow hover">
+                        <Link to="/add-pet"
+                            style={{ textDecoration: 'none', fontFamily: 'Fredoka One' }}>+ add a pet
+                        </Link></div>
+                </Card>
+            </div>
         </div>
     </>)
 }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body {
-    /* background-image: url("paper.gif"); */
+    /* background-image: url("%PUBLIC_URL%/paws-background.png"); */
     background-size: cover;
     background: linear-gradient(180deg, rgba(102, 153, 255, 1) 35%, rgba(42, 113, 255, 1) 100%) no-repeat center fixed !important;
 }
@@ -10,37 +10,43 @@ body {
     color: rgb(255, 255, 255);
     padding: 1.5rem rem 0 0 3rem;
     margin-top: 3rem;
-    margin-left: 3.7rem;
+    margin-left: 26rem;
     font-family: 'Fredoka One', cursive;
     font-size: 2.5rem;
     letter-spacing: 1px;
 }
 
-.homepage-labels {
+.owner-homepage-labels {
     color: rgb(255, 255, 255);
     padding: 1.5rem rem 0 0 3rem;
     margin-top: 3rem;
-    margin-left: 3.7rem;
+    margin-left: 14rem;
     font-family: 'Fredoka One', cursive;
     font-size: 3rem;
     letter-spacing: 1px;
 }
 
 .vetHomeContainer {
-    margin: auto;
-    max-width: 900px;
-    border: black solid 2px;
+    margin-left: 10rem;
+    margin-top: 3rem;
+    max-width: 1100px;
 }
 
 .pet-container {
-    margin-left: 3rem !important;
+    margin-left: 14rem !important;
     margin-top: 1px !important;
 }
 
-.pet-list-container {
+.pet-fact-container {
+    margin-left: 21rem;
+}
+
+.vet-pet-list-container {
     display: flex;
+    margin-top: 1rem;
     justify-content: space-between;
     padding: 0 8rem;
+    background-color: white;
 }
 
 .pet-list-container-owner {
@@ -52,6 +58,13 @@ body {
     margin: auto;
     margin-bottom: 320px;
     margin-left: 1.7rem;
+}
+
+.card-left {
+    margin-left: 4rem;
+    margin-top: 1rem;
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
 }
 
 

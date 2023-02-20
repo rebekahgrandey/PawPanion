@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { editPet, getPetById } from "../../modules/petManager";
+import { Button } from "reactstrap";
+import "./AddPet.css"
 
 export const EditPetForm = () => {
     const [pet, setPet] = useState([])
@@ -60,45 +62,53 @@ export const EditPetForm = () => {
     return (
         <>
 
-            <form>
-                <h2>Edit {pet.name}</h2>
+            <form className="form-container mt-5">
+                <div><a
+                    style={{ textDecoration: "none" }} href="/">Return to HomePage</a></div>
+                <h2 className="mt-2">Edit {pet.name}</h2>
                 <label htmlFor="name">Name</label>
-                <input
+                <div><input
                     id="name"
+                    className="field-input"
                     type="string"
                     value={userInput.name || ""}
                     onChange={handleInputChange}
-                />
+                /></div>
 
                 <label htmlFor="breed">Breed</label>
-                <input
+                <div><input
                     id="breed"
+                    className="field-input"
                     type="string"
                     value={userInput.breed || ""}
                     onChange={handleInputChange}
-                />
+                /></div>
 
                 <label htmlFor="birthdate">Birthdate</label>
-                <input
+                <div><input
                     id="birthdate"
+                    className="field-input"
                     type="datetime"
                     value={userInput.birthdate || ""}
                     onChange={handleInputChange}
-                />
+                /></div>
 
                 <label htmlFor="imageLocation">Profile Image URL</label>
-                <input
+                <div><input
                     id="imageLocation"
+                    className="field-input"
                     type="text"
                     value={userInput.imageLocation || ""}
                     onChange={handleInputChange}
-                />
+                /></div>
 
-                <button
+                <Button
+                    className="mt-2"
+                    style={{ borderRadius: "10px" }}
                     onClick={handleSaveButtonClick}>Save changes
-                </button>
+                </Button>
 
-                <a href="/">Return to HomePage</a>
+
             </form>
 
         </>
